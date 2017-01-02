@@ -11,5 +11,5 @@ This is my space to noodle lessons learnt, challenges identified and how were th
 
 ---
 
- - General
-	January 1, 2017 : [First Day] (pages/general/2017/01/01/firstday.html)
+General
+ : January 1, 2017 : [First Day](pages/general/2017/01/01/firstday.html)
