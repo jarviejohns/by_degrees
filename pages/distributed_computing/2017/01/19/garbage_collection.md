@@ -8,21 +8,21 @@ Garbage collection - finding and throwing garbage. It is an automated memory rec
 ## What is Garbage?
 The GC process tracks down all objects that are still used and marks everything else as garbage.
 
-## Manual memory Management
+### Manual memory Management
 Explicitly allocate memory and free memory for data. If the memory is not freed, it could be claimed but cannot be used. This leads to memory leak.
 
-## Early forms of automated memory management
+### Early forms of automated memory management
 * Destructors
 	Destructors will automatically called when objects are not in scope, but not efficient when objects are shared during multi-threading.
 * Reference counting via shared pointers
 	When the count of references to an object reaches 0, the object can be safely reclaimed. This is done by the shared pointer. 
 
-	GCRootA---> OB1(1)--> OB5(3)
-	GCRootB---> OB2(1)<-- OB4(1)
-	ob(2)
-	ob(1)<-- ob(2)
-	ob1(1)-->ob2(1)-
-	|_______<______|
+	GCRootA---> OB1(1)--> OB5(3)  
+	GCRootB---> OB2(1)<-- OB4(1)  
+	ob(2)  
+	ob(1)<-- ob(2)  
+	ob1(1)-->ob2(1)-  
+	|_______<______|  
 
 	Here GCRoots indicate the objects they point to are still in use. OB indicates live objects and the reference counts. ob refers to objects that are not explicitly used by any objects. So, the ob objects are garbage.
 
@@ -61,9 +61,9 @@ Dis : JVM behaves poorly for objects with medium life expectancy.
 
 ## General Memory pools
 
--------------------Young---------------|----------Tenured------------|-----PermGen--------|
------Eden-----------|---S1---|--S2-----|-----------------------------|--------------------|
---1.TLAB--2.TLAB--CA|--------|---------|-----------------------------|--------------------|
+-------------------Young---------------|----------Tenured------------|-----PermGen--------|  
+-----Eden-----------|---S1---|--S2-----|-----------------------------|--------------------|  
+--1.TLAB--2.TLAB--CA|--------|---------|-----------------------------|--------------------|  
 
 ### Eden
 * Area of memory where freshly/newly created objects reside
