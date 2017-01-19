@@ -1,7 +1,10 @@
 ---
 layout: page
-title: Garbage Collection
+title: Garbage Collection (Basics)
 ---
+
+### [Basics](pages/distributed_computing/2017/01/19/garbage_collection.html)
+### [Algorithms](pages/distributed_computing/2017/01/19/gc_algos.html)
 
 Garbage collection - finding and throwing garbage. It is an automated memory reclamation process for JVM.
 
@@ -80,12 +83,51 @@ Dis : JVM behaves poorly for objects with medium life expectancy.
 * Roles are then switched.
 * The process of copying live objects between two survivor spaces continues several cycles until the objects have "matured" or "tenured"
 * To determine whether the objects have matured, GC tracks the number of collections a particular object survived i.e with each GC in YoungGen, such object's age gets incremented. When age exceeds a tenuring threshold, they get copied to OldGen space.
-** Tenuring Threshold can be dynamically set by JVM   XX:+MaxTenuringThreshold. 0=> immediate promotion from Eden to OldGen without copying it to Survivior space. Default, 15 GC cycles.
+** Tenuring Threshold can be dynamically set by JVM   
+
+	XX:+MaxTenuringThreshold=0. 
+
+	0=> immediate promotion from Eden to OldGen without copying it to Survivior space. Default, 15 GC cycles.
 * Promotion may also happen if size of survivor unable to hold all live objects.
 
 
 ### Old Generation
+* Significantly larger and contains objects that are expected to live much longer.
+* GC happens less frequently
+* There is no Mark and Copy since objects are expected to be alive in OldGen. But, moved around to avoid fragmentation.
 
+
+### PermGen
+* Area where metadata such as classes were stored. 
+* Uncontrolled area before Java 8 and often resulted in java.lang.OutOfMemoryError: PermGen space
+* Solution : increase the PermGen size
+  
+  java -XX:MaxPermSize=256m com.mycompany.MyApplication
+
+
+### MetaSpace
+* Class definitions in Java 8 are now stored in native memory and does not interfere with regular heap objects. This means we no longer run into OOM Errors, but not shielded from native memory allocation errors. To protect, we can limit the metaspace size using - 
+  
+  java -XX:MaxMetaspaceSize=256m com.mycompany.MyApplication
+
+
+## Minor GC, Major GC and Full GC
+
+The real crux, irrespective of the type of GC, dod it stop all threads or able to progress concurrently?
+
+### Minor GC
+* Collecting garbage from YounGen is MinorGC i.e cleans the YoungGen.
+* Always triggered when JVM is unable to allocate space for new objecs i.e when Eden gets full. High Allocation rate of new objects, implies frequent Minor GC.
+* Tenured Gen is effectively ignored
+* Minor GC is STW event.
+** Length of pause is negligible if most of the objects in Eden end up being garbage and never copied to Survivor/OldGen.
+** If most of the objects are not eligible for collection, then Minor GC pauses start taking considerable time.
+
+### Major GC
+* Cleaning up the OldGen
+
+### Final GC
+* Cleanup entire Heap i.e both YoungGen and OldGen
 
 
 

@@ -11,8 +11,9 @@ This is my space to noodle lessons learnt, challenges identified and how were th
 
 ---
 
+Distributed Computing
+ : January 19, 2017: [Garbage Collection](pages/distributed_computing/2017/01/19/garbage_collection.html)  
+
+
 General
  : January 1, 2017 : [First Day](pages/general/2017/01/01/firstday.html)
-
-Distributed Computing
- : January 19, 2017: [Garbage Collection](pages/distributed_computing/2017/01/19/garbage_collection.html)
