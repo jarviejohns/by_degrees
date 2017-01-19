@@ -3,8 +3,8 @@ layout: page
 title: Garbage Collection (Basics)
 ---
 
-[Basics](pages/distributed_computing/2017/01/19/garbage_collection.html) 
-[Algorithms](pages/distributed_computing/2017/01/19/gc_algos.html) 
+[Basics](https://jarviejohns.github.io/by_degrees/pages/distributed_computing/2017/01/19/garbage_collection.html) 
+[Algorithms](https://jarviejohns.github.io/by_degrees/pages/distributed_computing/2017/01/19/gc_algos.html) 
 
 Garbage collection - finding and throwing garbage. It is an automated memory reclamation process for JVM.
 
